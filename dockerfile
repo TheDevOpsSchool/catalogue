@@ -7,14 +7,12 @@ RUN go mod init github.com/TheDevOpsSchool/catalogue.git
 
 RUN go mod tidy
 
-RUN go mod download && go mod verify
+RUN go mod vendor
 
-COPY /main.go .
+COPY . /app
 
-RUN go build main.go
+RUN go build .
 
 EXPOSE 8080
 
-RUN chmod +x ./main.go
-
-CMD ["./main"]
+CMD ["./app"]
